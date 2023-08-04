@@ -1,0 +1,19 @@
+<div class="main-content">
+    <div class="left-menu">
+        <app-side-menu [maintutorial] = "'html'" [menu] = 'menu'></app-side-menu>
+    </div>
+    <div class="content">
+        <router-outlet>
+            FirstName: <input [appCustom]="'red'" [(ngModel)]="regInfo.firstName" (focus)="onFocus($event)" (change)="firstNameChange()"><br>
+            LastName: <input [appCustom] = "'blue'" [(ngModel)]="regInfo.lastName" (focus)="onFocus($event)"/><br>
+            Age:<input [(ngModel)] ='regInfo.age' (focus)="onFocus($event)"/><br>
+            Phone: <input appCustom [(ngModel)]="regInfo.phone" (focus)="onFocus($event)"/><br>
+            DOB: <input [(ngModel)]="regInfo.dob"/>
+
+        </router-outlet>
+    </div>
+
+</div> 
+
+
+''

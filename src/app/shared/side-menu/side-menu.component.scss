@@ -1,0 +1,31 @@
+.side-menu-container { 
+    background-color: lightgrey;
+    padding: 15px;
+    min-height: 400px;
+.side-menu {
+    list-style-type: none;
+    color: solid black;
+    padding: 0;
+    margin-left: 0px;
+    position: static;
+
+}  
+ 
+ li {
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: large;
+ }
+
+li:hover {
+    background: lightgreen;
+    cursor: pointer;
+    color:  #345654
+} 
+
+li.active {
+    background: #04AA6D;
+}
+
+}

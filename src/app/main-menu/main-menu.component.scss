@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+ }
+ .header {
+    height: 100px;
+    background: lightblue;
+    padding-left: 20px;
+    padding-top: 10px;
+    border-bottom: 2px solid yellow;
+ }
+ .top-menu {
+   list-style-type: none;  
+   padding: 0;
+   margin: 0;
+   background: #282A35;
+   color: #fff;
+ }
+ li {
+    display: inline-block;
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+     // display: flex;
+    // justify-content: space-between;
+     flex-direction: row;
+ }
+ li:hover {
+   background: #000;
+   cursor: pointer;
+   color: Red;
+ }
+ li.active {
+  background: #04AA6D;
+ }
+  

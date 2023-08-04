@@ -1,0 +1,9 @@
+<div class="user-container">
+    <div>{{user.name}}</div>
+    <div>{{user.email}}</div>
+    <div>{{user.phone}}</div>
+    <!-- <div><a [routerLink]="['/users', user.id]">View Details</a></div> -->
+    <div><a (click)='goToUserDetails(user.id)'>View Details</a></div>
+</div>
+
+<!-- <button (click)="save()">save</button> -->

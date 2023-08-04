@@ -1,0 +1,7 @@
+
+<div class="side-menu-container">
+    <h2>{{maintutorial.toUpperCase() + '  Tutorial'}}</h2>
+    <ul class="side-menu">
+        <li *ngFor='let item of menu' [routerLink]="['/' +  maintutorial + '/' + item.path]" routerLinkActive="active">{{maintutorial.toUpperCase()+"  "+item.name}}</li>
+    </ul>
+</div>

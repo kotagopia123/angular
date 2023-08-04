@@ -1,0 +1,44 @@
+
+<div class="login-container">
+    <div class="login-form">
+        <h2>Login Form</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <!-- <div class="imgcontainer">
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            </div> -->
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" formControlName="userName" maxlength="50" placeholder="Enter Username" name="uname">
+                <ng-container
+                    *ngIf="(getLoginFormControl('userName').touched || getLoginFormControl('userName').dirty) && getLoginFormControl('userName').invalid">
+                    <div class="error" *ngIf="getLoginFormControl('userName').errors['required']">User Name is required
+                    </div>
+                    <div class="error" *ngIf="getLoginFormControl('userName').errors['minlength']">Min. 8 chars required
+                        for User Name</div>
+                    <div class="error" *ngIf="getLoginFormControl('userName').errors['usernameAlreadyExists']">
+                        User Name already taken. Please try another</div>
+                </ng-container>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" formControlName="password" placeholder="Enter Password" name="psw">
+                <div class="error"
+                    *ngIf="(getLoginFormControl('password').touched || getLoginFormControl('password').dirty) && getLoginFormControl('password').invalid && getLoginFormControl('password').errors['required']">
+                    Password is required</div>
+                <div class="error"
+                    *ngIf="(getLoginFormControl('password').touched || getLoginFormControl('password').dirty) && getLoginFormControl('password').invalid && getLoginFormControl('password').errors['invalidPwd']">
+                    Password is Invalid</div>
+                <!-- <button [disabled]="loginForm.invalid" (click)="login()">Login</button> -->
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" formControlName="rememberMe" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container links" style="background-color:#f1f1f1">
+                <a routerLink="/registration"><span class="psw">Register</span></a>
+                <a routerLink="/forgotpassword"><span class="psw">Forgot password?</span></a>
+            </div>
+        </form>
+
+    </div>

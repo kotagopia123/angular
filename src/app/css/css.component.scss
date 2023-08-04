@@ -1,0 +1,14 @@
+.main-content div{
+    display: flex;
+    .left-menu {
+        width: 25%;
+        min-height: 400px;
+        border-right: 2px solid #ddd;
+    }
+
+    .content {
+        position: static;
+    }
+
+}
+

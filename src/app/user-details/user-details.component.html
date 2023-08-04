@@ -1,0 +1,18 @@
+<h1>User Details</h1>
+<ng-container *ngIf="user; else notFound">
+    <div>Name: {{user.name}}</div>
+    <div>Email: {{user.email}}</div>
+    <div>Phone: {{user.phone}}</div>
+    <ng-container *ngIf="user.adderss">
+        <h2>Adderss Details</h2>
+        <div>Line1: {{user.adderss.line1}}</div>
+        <div>City: {{user.adderss.city}}</div>
+        <div>State: {{user.adderss.state}}</div>
+    </ng-container>
+</ng-container>
+
+<ng-template #notFound>
+  <div>User Not Found</div>  
+</ng-template>
+
+<button (click)="nextUser()">Next</button>

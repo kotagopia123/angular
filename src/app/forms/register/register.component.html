@@ -1,0 +1,140 @@
+<div class="login-container">
+<div class="login-form">
+    <h2>Registration Form</h2>
+    <form *ngIf="regForm" [formGroup]="regForm" (ngSubmit)="save()">
+        <div class="container">
+            <label for="fname"><b>First Name</b></label>
+            <input type="text" formControlName="firstName" maxlength="50" placeholder="Enter First Name"
+                name="fname">
+            <ng-container
+                *ngIf="(getControl('firstName').touched || getControl('firstName').dirty) && getControl('firstName').invalid">
+                <div class="error" *ngIf="getControl('firstName').errors['required']">First Name is required</div>
+            </ng-container>
+            <label for="lname"><b>Last Name</b></label>
+            <input type="text" formControlName="lastName" maxlength="50" placeholder="Enter Last Name" name="lname">
+            <ng-container
+                *ngIf="(getControl('lastName').touched || getControl('lastName').dirty) && getControl('lastName').invalid">
+                <div class="error" *ngIf="getControl('lastName').errors['required']">Last Name is required</div>
+            </ng-container>
+            <label for="email"><b>Email</b></label>
+            <input type="text" formControlName="email" (input)="validateEmail($event)" maxlength="150"
+                placeholder="Enter Email" name="email">
+            <ng-container
+                *ngIf="(getControl('email').touched || getControl('email').dirty) && getControl('email').invalid">
+                <div class="error" *ngIf="getControl('email').errors['required']">Email is required</div>
+                <div class="error" *ngIf="getControl('email').errors['pattern']">Enter Valid Email</div>
+            </ng-container>
+            <label for="age"><b>Age</b></label>
+            <input type="text" formControlName="age" maxlength="3" placeholder="Enter Age" name="age">
+            <ng-container
+                *ngIf="(getControl('age').touched || getControl('age').dirty) && getControl('age').invalid">
+                <div class="error" *ngIf="getControl('age').errors['ageRange']">Age should be 18-30</div>
+                <div class="error" *ngIf="getControl('age').hasError('required')">Enter age</div>
+            </ng-container>
+            <label for="dob"><b>DOB</b></label>
+            <!-- <input type="text" formControlName="dob" bsDatepicker [minDate]="minDate" [maxDate]="maxDate" placeholder="Enter DOB" name="dob"> -->
+            <label for="gender"><b>Gender*</b></label>
+            <div>
+                <input type="radio" formControlName="gender" value="male" name="gender"> <span>Male</span>
+                <input type="radio" formControlName="gender" value="female" name="gender"> <span>Female</span>
+            </div>
+            <!-- <label for="hobbies"><b>Hobbies*</b></label>
+            <div>
+                <input type="checkbox" formControlName="hobbies" value="playing" name="hobbies"> <span>Playing</span>
+                <input type="checkbox" formControlName="hobbies" value="singing" name="hobbies"> <span>Singing</span>
+                <input type="checkbox" formControlName="hobbies" value="dancing" name="hobbies"> <span>Dancing</span>
+                <input type="checkbox" formControlName="hobbies" value="cooking" name="hobbies"> <span>Cooking</span>
+            </div> -->
+            <div formGroupName="address">
+                <h2>Address Details:</h2>
+                <label for="address1"><b>Address1</b></label>
+                <input type="text" formControlName="address1" maxlength="150" placeholder="Enter Address1"
+                    name="address1">
+                <ng-container
+                    *ngIf="(getAddressFormControl('address1').touched || getAddressFormControl('address1').dirty) && getAddressFormControl('address1').invalid">
+                    <div class="error" *ngIf="getAddressFormControl('address1').errors['required']">Address1 is
+                        required</div>
+                </ng-container>
+                <label for="address2"><b>Address2</b></label>
+                <input type="text" formControlName="address2" maxlength="150" placeholder="Enter Address2"
+                    name="address2">
+                <label for="city"><b>City</b></label>
+                <div>
+                    <select formControlName="city" name="city">
+                        <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                    </select>
+                    <ng-container
+                        *ngIf="(getAddressFormControl('city').touched || getAddressFormControl('city').dirty) && getAddressFormControl('city').invalid">
+                        <div class="error" *ngIf="getAddressFormControl('city').errors['required']">Select City
+                        </div>
+                    </ng-container>
+                </div>
+                <label for="state"><b>State</b></label>
+                <div>
+                    <select formControlName="state">
+                        <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                    </select>
+                    <ng-container
+                        *ngIf="(getAddressFormControl('state').touched || getAddressFormControl('state').dirty) && getAddressFormControl('state').invalid">
+                        <div class="error" *ngIf="getAddressFormControl('state').errors['required']">Select State
+                        </div>
+                    </ng-container>
+                </div>
+                <label for="country"><b>Country</b></label>
+                <div>
+                    <select formControlName="country">
+                        <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                    </select>
+                    <ng-container
+                        *ngIf="(getAddressFormControl('country').touched || getAddressFormControl('country').dirty) && getAddressFormControl('country').invalid">
+                        <div class="error" *ngIf="getAddressFormControl('country').errors['required']">Select
+                            Country</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div formArrayName="companies" *ngFor="let company of companies.controls; let i = index">
+                <div [formGroupName]="i">
+                    <div style="display: flex; justify-content: space-between">
+                        <h2>Company {{i+1}} Details </h2><button (click)="deleteCompany(i)">Delete</button>
+                    </div>
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" formControlName="name" maxlength="150" placeholder="Enter Name" name="name">
+                    <ng-container
+                        *ngIf="(company.get('name')?.touched || company.get('name')?.dirty) && company.get('name')?.invalid">
+                        <div class="error" *ngIf="company.get('name')?.errors?.['required']">Name is required</div>
+                    </ng-container>
+                    <label for="location"><b>Location</b></label>
+                    <input type="text" formControlName="location" maxlength="150" placeholder="Enter Location"
+                        name="location">
+                    <label for="phone"><b>Phone</b></label>
+                    <input type="text" formControlName="phone" maxlength="10" placeholder="Enter Phone"
+                        name="phone">
+                </div>
+            </div>
+            <label>
+                <input type="checkbox" formControlName="showNewControl" (click)="addNewControl($event)"
+                    name="remember"> add New Control
+            </label>
+            <div *ngIf="regForm.value.showNewControl">
+                <label for="details"><b>Details</b></label>
+                <input type="text" formControlName="newDetails" maxlength="150" placeholder="Enter details"
+                    name="details">
+            </div>
+            <div style="text-align: right;">
+                <button (click)="addNew()">Add New Company</button>
+            </div>
+            <label for="desc"><b>Profile Summary</b></label>
+                <textarea formControlName="desc" style="width: 100%; height: 100px"></textarea>
+            <button type="submit">Save</button>
+            <label>
+                <input type="checkbox" formControlName="terms" name="remember"> Accept T&C
+            </label>
+        </div>
+
+        <div class="container links" style="background-color:#f1f1f1">
+            <a routerLink="/registration"><span class="psw">Register</span></a>
+            <a routerLink="/forgotpassword"><span class="psw">Forgot password?</span></a>
+        </div>
+    </form>
+</div>
+</div>
